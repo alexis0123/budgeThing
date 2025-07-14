@@ -4,14 +4,11 @@ import com.budgething.Model.Expense
 
 class ExpenseRepository {
 
-    val expenses: MutableList<Expense> = mutableListOf()
+    val _expenses: MutableList<Expense> = mutableListOf()
+    val expenses: List<Expense> get() = _expenses
 
     fun addExpense(expense: Expense) {
-        expenses.add(expense)
-    }
-
-    fun getAllExpenses(): MutableList<Expense> {
-        return expenses
+        _expenses.add(expense)
     }
 
 }
