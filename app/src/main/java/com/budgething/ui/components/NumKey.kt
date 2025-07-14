@@ -16,6 +16,6 @@ fun Key(
 ) {
     Button(
         onClick = onClick,
-        modifier = Modifier.width(70.dp).height(70.dp)
+        modifier = Modifier.width(100.dp).height(80.dp)
     ) { Text(label, fontSize = 25.sp) }
 }

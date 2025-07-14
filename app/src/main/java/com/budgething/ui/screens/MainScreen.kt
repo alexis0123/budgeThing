@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -22,14 +23,17 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.focusModifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.budgething.ui.theme.BudgeThingTheme
 import com.budgething.R
+import com.budgething.ui.components.ConfirmAmount
+import com.budgething.ui.components.FormattedAmountDisplay
 import com.budgething.ui.components.Key
-import com.budgething.ui.components.ReadOnlyTextField
 
 @Composable
 fun BoxScope.Background() {
@@ -43,13 +47,12 @@ fun BoxScope.Background() {
 
 @Composable
 fun MainScreen() {
+    val amount = remember { mutableStateOf("")}
     Box(
         modifier = Modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
     ) {
-
-        Background()
 
         Column(
             modifier = Modifier
@@ -58,9 +61,7 @@ fun MainScreen() {
             verticalArrangement = Arrangement.SpaceEvenly,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            val amount = remember { mutableStateOf("")}
-            val formattedAmount = amount.value.toLongOrNull()?.let {
-                "%,d".format(it) } ?: amount.value
+
             Box(
                 modifier = Modifier
                     .weight(1f)
@@ -68,8 +69,13 @@ fun MainScreen() {
                     .padding(bottom = 20.dp),
                 contentAlignment = Alignment.BottomEnd
             ) {
-                Text("$formattedAmount | ", fontSize = 40.sp,
-                    color = MaterialTheme.colorScheme.onBackground)
+
+                Row(modifier = Modifier.padding(horizontal = 15.dp)) {
+                    FormattedAmountDisplay(amount)
+                    if (amount.value.isNotEmpty()) {
+                        ConfirmAmount() {}
+                    }
+                }
             }
 
             Column(
@@ -82,7 +88,7 @@ fun MainScreen() {
                     listOf("7", "8", "9"),
                     listOf("4", "5", "6"),
                     listOf("1", "2", "3"),
-                    listOf("0", ".", "")
+                    listOf("0", ".", "C")
                 )
 
                 keypad.forEach { row ->
@@ -93,7 +99,7 @@ fun MainScreen() {
                         row.forEach { label ->
                             Key(label) {
                                 when (label) {
-                                    "" -> amount.value = amount.value.dropLast(1)
+                                    "C" -> amount.value = ""
                                     else -> amount.value += label
                                 }
                             }
