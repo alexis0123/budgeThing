@@ -90,8 +90,9 @@ fun MainScreen() {
                     ) {
                         row.forEach { label ->
                             when(label) {
+                                "." -> Key(label) { if (label !in amount) amount += label }
+                                "⌫" -> Key(label) { amount = amount.dropLast(1)}
                                 "C" -> Key(label) { amount = "" }
-                                "⌫" -> Key(label) { amount = amount.dropLast(1) }
                                 "→" -> Confirm("→", amount.isNotEmpty() ) {}
                                 "✔" -> Confirm("✔", amount.isNotEmpty() ) {}
                                 else -> Key(label) { amount += label }
