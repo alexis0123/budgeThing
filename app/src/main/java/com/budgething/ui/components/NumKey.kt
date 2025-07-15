@@ -23,7 +23,7 @@ fun Key(
 }
 
 @Composable
-fun ConfirmAmount(enabled: Boolean, onClick: () -> Unit) {
+fun Confirm(label: String, enabled: Boolean, onClick: () -> Unit) {
 
     Button(
         onClick = onClick,
@@ -31,6 +31,6 @@ fun ConfirmAmount(enabled: Boolean, onClick: () -> Unit) {
         colors = ButtonDefaults.buttonColors(
             containerColor = Color(0xFF2E7D32)),
         modifier = Modifier.width(80.dp).height(80.dp)
-    ) { Text("✔", fontSize = 25.sp) }
+    ) { Text(label, fontSize = 30.sp) }
 
 }

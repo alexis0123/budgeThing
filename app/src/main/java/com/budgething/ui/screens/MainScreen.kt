@@ -34,7 +34,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.budgething.ui.theme.BudgeThingTheme
 import com.budgething.R
-import com.budgething.ui.components.ConfirmAmount
+import com.budgething.ui.components.Confirm
 import com.budgething.ui.components.FormattedAmountDisplay
 import com.budgething.ui.components.Key
 
@@ -89,16 +89,11 @@ fun MainScreen() {
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
                         row.forEach { label ->
-//                            Key(label) {
-//                                when (label) {
-//                                    "C" -> amount = ""
-//                                    "⌫" -> amount = amount.dropLast(1)
-//                                }
-//                            }
                             when(label) {
                                 "C" -> Key(label) { amount = "" }
-                                "✔" -> ConfirmAmount( amount.isNotEmpty() ) {}
                                 "⌫" -> Key(label) { amount = amount.dropLast(1) }
+                                "→" -> Confirm("→", amount.isNotEmpty() ) {}
+                                "✔" -> Confirm("✔", amount.isNotEmpty() ) {}
                                 else -> Key(label) { amount += label }
                             }
                         }
