@@ -7,11 +7,11 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun FormattedAmountDisplay(amount: MutableState<String>) {
+fun FormattedAmountDisplay(amount: String) {
 
-    val formattedAmount = amount.value.toLongOrNull()?.let {
+    val formattedAmount = amount.toLongOrNull()?.let {
         "%,d".format(it)
-    } ?: amount.value
+    } ?: amount
 
     Text(
         formattedAmount, fontSize = 40.sp,
