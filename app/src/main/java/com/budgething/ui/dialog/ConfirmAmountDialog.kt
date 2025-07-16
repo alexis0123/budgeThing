@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -19,6 +20,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 @Composable
 fun ConfirmAmountDialog(showDialog: Boolean, amount: String, dismiss: () -> Unit) {
+
+    val elevatedColor = MaterialTheme.colorScheme.surfaceColorAtElevation(200.dp)
+
     if (showDialog) {
         Dialog(onDismissRequest = dismiss) {
             Box(
@@ -27,7 +31,7 @@ fun ConfirmAmountDialog(showDialog: Boolean, amount: String, dismiss: () -> Unit
                     .height(400.dp)
                     .padding(10.dp)
                     .background(
-                        color = MaterialTheme.colorScheme.surface,
+                        color = elevatedColor,
                         shape = RoundedCornerShape(10.dp)
                     )
             ) {
@@ -38,7 +42,7 @@ fun ConfirmAmountDialog(showDialog: Boolean, amount: String, dismiss: () -> Unit
                     verticalArrangement = Arrangement.SpaceEvenly,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Text("Hello, World")
+                    Text("Hello, World", color = MaterialTheme.colorScheme.onSurface)
                 }
 
             }
