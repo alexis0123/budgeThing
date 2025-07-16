@@ -1,4 +1,4 @@
-package com.budgething.ViewModel
+package com.budgething.viewmodel
 
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,7 +14,7 @@ class NumKeyViewModel: ViewModel() {
     }
 
     fun deleteLast() {
-        _amount.value.dropLast(1)
+        _amount.value = _amount.value.dropLast(1)
     }
 
     fun deleteAll() {
