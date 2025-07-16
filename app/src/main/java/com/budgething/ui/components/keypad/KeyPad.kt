@@ -33,9 +33,9 @@ fun KeyPad(
         ) {
             row.forEach { label ->
                 when(label) {
-                    "." -> Key(label) {
-                        if (label !in amount.value) viewModel.addDigit(label)
-                    }
+                    "0" -> Key(label) { viewModel.addZero() }
+                    "00" -> Key(label) { viewModel.addTwoZeros() }
+                    "." -> Key(label) { viewModel.addDot() }
                     "⌫" -> Key(label) { viewModel.deleteLast() }
                     "C" -> Key(label) { viewModel.deleteAll() }
                     "→" -> Confirm("→", amount.value.isNotEmpty() ) {}

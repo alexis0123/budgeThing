@@ -64,7 +64,7 @@ fun MainScreen(viewModel: NumKeyViewModel = viewModel()) {
 
             Column(
                 modifier = Modifier
-                    .weight(1.5f)
+                    .weight(1.4f)
                     .fillMaxWidth()
                     .padding(bottom = 50.dp),
                 verticalArrangement = Arrangement.SpaceBetween

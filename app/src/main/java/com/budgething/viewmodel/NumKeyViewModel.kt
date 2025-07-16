@@ -10,7 +10,34 @@ class NumKeyViewModel: ViewModel() {
     val amount: StateFlow<String> get() = _amount
 
     fun addDigit(num: String) {
-        _amount.value += num
+        if (_amount.value.length >= 12) return
+
+        when(_amount.value) {
+            "0" -> _amount.value = num
+            else -> _amount.value += num
+        }
+    }
+
+    fun addZero() {
+        if (_amount.value.length >= 12) return
+        if (_amount.value != "0") _amount.value += "0"
+    }
+
+    fun addDot() {
+        if (!_amount.value.contains(".")) {
+            when(_amount.value) {
+                "", "0" -> addDigit("0.")
+                else -> addDigit(".")
+            }
+        }
+    }
+
+    fun addTwoZeros() {
+        when(_amount.value) {
+            "" -> addZero()
+            "0" -> {}
+            else -> addDigit("00")
+        }
     }
 
     fun deleteLast() {
