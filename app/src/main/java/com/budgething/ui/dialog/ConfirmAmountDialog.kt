@@ -18,25 +18,30 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 @Composable
-fun ConfirmAmountDialog(amount: String, dismiss: () -> Unit) {
-    Dialog(onDismissRequest = dismiss) {
-        Box(
-            modifier = Modifier
-                .width(300.dp)
-                .height(350.dp)
-                .padding(10.dp)
-                .background(color = MaterialTheme.colorScheme.surface, shape = RoundedCornerShape(10.dp))
-        ) {
-
-            Column(
+fun ConfirmAmountDialog(showDialog: Boolean, amount: String, dismiss: () -> Unit) {
+    if (showDialog) {
+        Dialog(onDismissRequest = dismiss) {
+            Box(
                 modifier = Modifier
-                    .fillMaxSize(),
-                verticalArrangement = Arrangement.SpaceEvenly,
-                horizontalAlignment = Alignment.CenterHorizontally
+                    .width(350.dp)
+                    .height(400.dp)
+                    .padding(10.dp)
+                    .background(
+                        color = MaterialTheme.colorScheme.surface,
+                        shape = RoundedCornerShape(10.dp)
+                    )
             ) {
-                Text("Hello, World")
-            }
 
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize(),
+                    verticalArrangement = Arrangement.SpaceEvenly,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text("Hello, World")
+                }
+
+            }
         }
     }
 }

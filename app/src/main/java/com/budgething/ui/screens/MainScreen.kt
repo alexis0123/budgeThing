@@ -37,10 +37,15 @@ import com.budgething.R
 import com.budgething.ui.components.Confirm
 import com.budgething.ui.components.FormattedAmountDisplay
 import com.budgething.ui.components.Key
+import com.budgething.ui.dialog.ConfirmAmountDialog
 
 @Composable
 fun MainScreen() {
     var amount by remember { mutableStateOf("")}
+    var showConfirmAmountDialog by remember { mutableStateOf(false) }
+    ConfirmAmountDialog(showConfirmAmountDialog, amount) {
+        showConfirmAmountDialog = false
+    }
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -90,11 +95,15 @@ fun MainScreen() {
                     ) {
                         row.forEach { label ->
                             when(label) {
-                                "." -> Key(label) { if (label !in amount) amount += label }
+                                "." -> Key(label) {
+                                    if (label !in amount) amount += label
+                                }
                                 "⌫" -> Key(label) { amount = amount.dropLast(1)}
                                 "C" -> Key(label) { amount = "" }
                                 "→" -> Confirm("→", amount.isNotEmpty() ) {}
-                                "✔" -> Confirm("✔", amount.isNotEmpty() ) {}
+                                "✔" -> Confirm("✔", amount.isNotEmpty() ) {
+                                    showConfirmAmountDialog = true
+                                }
                                 else -> Key(label) { amount += label }
                             }
                         }
