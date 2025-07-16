@@ -1,4 +1,4 @@
-package com.budgething.ui.components
+package com.budgething.ui.components.keypad
 
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width

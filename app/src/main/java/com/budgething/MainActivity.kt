@@ -36,8 +36,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.budgething.ui.theme.BudgeThingTheme
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.budgething.ViewModel.GreetingsViewModel
-import com.budgething.ViewModel.SampleViewModel
 import com.budgething.ui.screens.MainScreen
 
 class MainActivity : ComponentActivity() {
