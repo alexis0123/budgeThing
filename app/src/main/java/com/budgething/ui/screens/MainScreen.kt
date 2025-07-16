@@ -25,7 +25,7 @@ import com.budgething.viewmodel.NumKeyViewModel
 import com.budgething.ui.theme.BudgeThingTheme
 import com.budgething.ui.components.FormattedAmountDisplay
 import com.budgething.ui.components.keypad.KeyPad
-import com.budgething.ui.dialog.ConfirmAmountDialog
+import com.budgething.ui.dialog.ConfirmExpenseDialog
 
 @Composable
 fun MainScreen(viewModel: NumKeyViewModel = viewModel()) {
@@ -33,7 +33,7 @@ fun MainScreen(viewModel: NumKeyViewModel = viewModel()) {
     val amount = viewModel.amount.collectAsState()
     var showConfirmAmountDialog by remember { mutableStateOf(false) }
 
-    ConfirmAmountDialog(showConfirmAmountDialog, amount.value) {
+    ConfirmExpenseDialog(showConfirmAmountDialog, amount.value) {
         showConfirmAmountDialog = false
 
     }
