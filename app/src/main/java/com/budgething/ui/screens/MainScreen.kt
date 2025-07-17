@@ -26,17 +26,29 @@ import com.budgething.ui.theme.BudgeThingTheme
 import com.budgething.ui.components.FormattedAmountDisplay
 import com.budgething.ui.components.keypad.KeyPad
 import com.budgething.ui.dialog.ConfirmExpenseDialog
+import com.budgething.viewmodel.ConfirmExpenseViewModel
 
 @Composable
-fun MainScreen(viewModel: NumKeyViewModel = viewModel()) {
+fun MainScreen(viewModel: NumKeyViewModel = viewModel(),
+               confirmExpenseViewModel: ConfirmExpenseViewModel = viewModel()
+) {
 
-    val amount = viewModel.amount.collectAsState()
-    var showConfirmAmountDialog by remember { mutableStateOf(false) }
+    val amount by viewModel.amount.collectAsState()
+    var showDialog by remember { mutableStateOf(false) }
+    var mainCategory by remember { mutableStateOf("") }
+    var subCategory by remember { mutableStateOf("") }
 
-    ConfirmExpenseDialog(showConfirmAmountDialog, amount.value) {
-        showConfirmAmountDialog = false
+    ConfirmExpenseDialog(
+        showDialog = showDialog,
+        amount = amount,
+        mainCategory = mainCategory,
+        subCategory = subCategory,
+        onMainCategoryChange = { mainCategory = it },
+        onSubCategoryChange = { subCategory = it },
+        dismiss = { showDialog = false },
+        viewModel = confirmExpenseViewModel
+    )
 
-    }
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -58,7 +70,7 @@ fun MainScreen(viewModel: NumKeyViewModel = viewModel()) {
                 contentAlignment = Alignment.BottomEnd
             ) {
                 Row(modifier = Modifier.padding(horizontal = 15.dp)) {
-                    FormattedAmountDisplay(amount.value)
+                    FormattedAmountDisplay(amount)
                 }
             }
 
@@ -72,7 +84,7 @@ fun MainScreen(viewModel: NumKeyViewModel = viewModel()) {
                 HorizontalDivider()
 
                 KeyPad({
-                    showConfirmAmountDialog = true
+                    showDialog = true
                 })
             }
         }

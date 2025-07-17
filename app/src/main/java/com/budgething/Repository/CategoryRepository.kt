@@ -106,8 +106,11 @@ class CategoryRepository {
 
     val categories: List<Category> get() = _categories
 
-    fun getSubCategoriesFor(mainCategory: String): List<String>? {
-        return _categories.firstOrNull { it.name == mainCategory }?.subcategories
+    fun getSubCategoriesFor(mainCategory: String): List<String> {
+        return _categories
+            .firstOrNull { it.name == mainCategory }
+            ?.subcategories
+            ?:_categories.flatMap { it.subcategories }
     }
 
     fun getMainCategoryFor(subcategory: String): String? {
@@ -123,10 +126,6 @@ class CategoryRepository {
 
     fun getMainCategories(): List<String> {
         return _categories.map { it.name }
-    }
-
-    fun getSubCategories(): List<String> {
-        return _categories.flatMap { it.subcategories }
     }
 
 }
