@@ -20,9 +20,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.budgething.viewmodel.ConfirmExpenseViewModel
+import com.budgething.ui.dialog.ConfirmExpenseViewModel
+import java.util.Locale
 
 @Composable
 fun ConfirmExpenseDialog(
@@ -67,7 +69,10 @@ fun ConfirmExpenseDialog(
                         onSelect = onSubCategoryChange
                     )
 
-                    Text("Amount: $amount", style = MaterialTheme.typography.bodyLarge)
+                    Text(
+                        text = String.format(Locale.US,"P %,.2f", amount.toDouble()),
+                        style = MaterialTheme.typography.bodyLarge,
+                        fontSize = 20.sp)
                 }
             }
         }

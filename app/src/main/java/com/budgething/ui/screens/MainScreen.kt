@@ -21,12 +21,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.budgething.viewmodel.NumKeyViewModel
+import com.budgething.ui.components.keypad.NumKeyViewModel
 import com.budgething.ui.theme.BudgeThingTheme
 import com.budgething.ui.components.FormattedAmountDisplay
 import com.budgething.ui.components.keypad.KeyPad
 import com.budgething.ui.dialog.ConfirmExpenseDialog
-import com.budgething.viewmodel.ConfirmExpenseViewModel
+import com.budgething.ui.dialog.ConfirmExpenseViewModel
 
 @Composable
 fun MainScreen(viewModel: NumKeyViewModel = viewModel(),
