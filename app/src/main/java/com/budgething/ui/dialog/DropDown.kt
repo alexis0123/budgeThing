@@ -25,7 +25,7 @@ fun Dropdown(
     itemsList: List<String>,
     selectedItem: String,
     label: String,
-    onSelect: (String) -> Unit
+    onSelect: (String) -> Unit,
 ) {
     var expanded by remember { mutableStateOf(false) }
 

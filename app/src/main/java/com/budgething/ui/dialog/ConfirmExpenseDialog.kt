@@ -1,6 +1,9 @@
 package com.budgething.ui.dialog
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -10,15 +13,19 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
@@ -30,14 +37,15 @@ import java.util.Locale
 fun ConfirmExpenseDialog(
     showDialog: Boolean,
     amount: String,
-    mainCategory: String,
-    subCategory: String,
-    onMainCategoryChange: (String) -> Unit,
-    onSubCategoryChange: (String) -> Unit,
     dismiss: () -> Unit,
     viewModel: ConfirmExpenseViewModel
 ) {
+
+    val mainCategory = viewModel.mainCategory.collectAsState()
+    val subCategory = viewModel.subCategory.collectAsState()
+
     val elevatedColor = MaterialTheme.colorScheme.surfaceColorAtElevation(200.dp)
+
 
     if (showDialog) {
         Dialog(onDismissRequest = dismiss) {
@@ -56,17 +64,23 @@ fun ConfirmExpenseDialog(
                     // Main Category Dropdown
                     Dropdown(
                         itemsList = viewModel.getMainCategories(),
-                        selectedItem = mainCategory,
+                        selectedItem = mainCategory.value,
                         label = "Main Category",
-                        onSelect = onMainCategoryChange
+                        onSelect = {
+                            viewModel.setMainCategoryTo(it)
+                            viewModel.clearSubCategory()
+                        }
                     )
 
                     // Sub Category Dropdown
                     Dropdown(
-                        itemsList = viewModel.getSubCategories(mainCategory),
-                        selectedItem = subCategory,
+                        itemsList = viewModel.getSubCategories(mainCategory.value),
+                        selectedItem = subCategory.value,
                         label = "Sub Category",
-                        onSelect = onSubCategoryChange
+                        onSelect = {
+                            viewModel.setSubCategoryTo(it)
+                            viewModel.fillMainCategory()
+                        }
                     )
 
                     Text(

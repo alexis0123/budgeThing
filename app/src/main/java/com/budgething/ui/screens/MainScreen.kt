@@ -33,18 +33,12 @@ fun MainScreen(viewModel: NumKeyViewModel = viewModel(),
                confirmExpenseViewModel: ConfirmExpenseViewModel = viewModel()
 ) {
 
-    val amount by viewModel.amount.collectAsState()
     var showDialog by remember { mutableStateOf(false) }
-    var mainCategory by remember { mutableStateOf("") }
-    var subCategory by remember { mutableStateOf("") }
+    val amount by viewModel.amount.collectAsState()
 
     ConfirmExpenseDialog(
         showDialog = showDialog,
         amount = amount,
-        mainCategory = mainCategory,
-        subCategory = subCategory,
-        onMainCategoryChange = { mainCategory = it },
-        onSubCategoryChange = { subCategory = it },
         dismiss = { showDialog = false },
         viewModel = confirmExpenseViewModel
     )

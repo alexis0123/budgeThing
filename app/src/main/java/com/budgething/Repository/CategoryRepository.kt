@@ -9,14 +9,8 @@ class CategoryRepository {
             "Groceries",
             "Snacks",
             "Drinks",
-            "Fast Food",
-            "Street Food",
-            "Desserts",
             "Fruits",
             "Vegetables",
-            "Meat & Poultry",
-            "Seafood",
-            "Dairy Products",
             "Baking Supplies",
             "Instant Food"
         )),
@@ -106,15 +100,15 @@ class CategoryRepository {
 
     val categories: List<Category> get() = _categories
 
-    fun getSubCategoriesFor(mainCategory: String): List<String> {
+    fun getMainCategoryFor(subcategory: String): String? {
+        return _categories.firstOrNull { it.subcategories.contains(subcategory) }?.name
+    }
+
+    fun getSubCategories(mainCategory: String): List<String> {
         return _categories
             .firstOrNull { it.name == mainCategory }
             ?.subcategories
             ?:_categories.flatMap { it.subcategories }
-    }
-
-    fun getMainCategoryFor(subcategory: String): String? {
-        return _categories.firstOrNull { it.subcategories.contains(subcategory) }?.name
     }
 
     fun addSubCategory(mainCategory: String, subcategory: String): Boolean {
