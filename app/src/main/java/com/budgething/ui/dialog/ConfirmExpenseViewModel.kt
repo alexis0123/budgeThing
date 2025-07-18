@@ -76,7 +76,11 @@ class ConfirmExpenseViewModel: ViewModel() {
     }
 
     fun setDone() {
-        _done.value = !_done.value
+        _done.value = true
+    }
+
+    fun setUnDone() {
+        _done.value = false
     }
 
 }

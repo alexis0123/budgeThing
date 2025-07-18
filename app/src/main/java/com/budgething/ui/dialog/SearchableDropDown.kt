@@ -6,10 +6,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.DropdownMenu
-import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
@@ -20,7 +17,6 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.text.style.LineHeightStyle
 
 @Composable
 fun SearchableDropDown(viewModel: ConfirmExpenseViewModel = viewModel()) {
@@ -36,6 +32,8 @@ fun SearchableDropDown(viewModel: ConfirmExpenseViewModel = viewModel()) {
             value = query,
             onValueChange = {
                 viewModel.changeQuery(it)
+                viewModel.clearSubCategory()
+                viewModel.clearMainCategory()
                 showFilter = it.isNotEmpty()
             },
             singleLine = true,

@@ -42,6 +42,7 @@ fun MainScreen(viewModel: NumKeyViewModel = viewModel(),
         showDialog = showDialog,
         amount = confirmedAmount,
         dismiss = { showDialog = false },
+        confirm = {},
         viewModel = confirmExpenseViewModel
     )
 

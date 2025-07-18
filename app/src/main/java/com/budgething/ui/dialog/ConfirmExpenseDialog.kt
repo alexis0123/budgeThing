@@ -4,11 +4,14 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.surfaceColorAtElevation
@@ -20,27 +23,26 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import java.util.Locale
+import androidx.compose.runtime.getValue
 
 @Composable
 fun ConfirmExpenseDialog(
     showDialog: Boolean,
     amount: String,
     dismiss: () -> Unit,
+    confirm: () -> Unit,
     viewModel: ConfirmExpenseViewModel
 ) {
 
-    val mainCategory = viewModel.mainCategory.collectAsState()
-    val subCategory = viewModel.subCategory.collectAsState()
+    val mainCategory by viewModel.mainCategory.collectAsState()
+    val subCategory by viewModel.subCategory.collectAsState()
+    val name by viewModel.query.collectAsState()
 
     val elevatedColor = MaterialTheme.colorScheme.surfaceColorAtElevation(200.dp)
 
     if (showDialog) {
         Dialog(
-            onDismissRequest = {
-                dismiss()
-                viewModel.clearAllState()
-                viewModel.setDone()
-            }
+            onDismissRequest = {}
         ) {
             Box(
                 modifier = Modifier
@@ -52,21 +54,22 @@ fun ConfirmExpenseDialog(
                 Column(
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(top = 20.dp)
+                        .padding(vertical = 20.dp)
                         .padding(horizontal = 20.dp),
                     verticalArrangement = Arrangement.Top,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Text(
-                    text = String.format(Locale.US,"P %,.2f", amount.toDouble()),
+                    text = String.format(Locale.US,"₱%,.2f", amount.toDouble()),
                     style = MaterialTheme.typography.bodyLarge,
                     fontSize = 20.sp,
                     color = MaterialTheme.colorScheme.onSurface
                     )
+
                     // Main Category Dropdown
                     Dropdown(
                         itemsList = viewModel.getMainCategories(),
-                        selectedItem = mainCategory.value,
+                        selectedItem = mainCategory,
                         label = "Main Category",
                         onSelect = {
                             viewModel.setMainCategoryTo(it)
@@ -80,8 +83,8 @@ fun ConfirmExpenseDialog(
 
                     // Sub Category Dropdown
                     Dropdown(
-                        itemsList = viewModel.getSubCategories(mainCategory.value),
-                        selectedItem = subCategory.value,
+                        itemsList = viewModel.getSubCategories(mainCategory),
+                        selectedItem = subCategory,
                         label = "Sub Category",
                         onSelect = {
                             viewModel.setSubCategoryTo(it)
@@ -93,6 +96,16 @@ fun ConfirmExpenseDialog(
                     )
 
                     SearchableDropDown()
+
+                    CancelRecordButton(
+                        dismiss = {
+                            dismiss()
+                            viewModel.clearAllState()
+                        },
+                        mainCategory = mainCategory,
+                        subCategory = subCategory,
+                        name = name
+                    )
 
                 }
             }

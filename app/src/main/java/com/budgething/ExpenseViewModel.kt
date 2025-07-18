@@ -7,8 +7,9 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import java.time.LocalDate
 
-class ExpenseViewModel(private val repo: ExpenseRepository): ViewModel() {
+class ExpenseViewModel(): ViewModel() {
 
+    private val repo = ExpenseRepository()
     private val _expenses = MutableStateFlow<List<Expense>>(emptyList())
     val expenses: StateFlow<List<Expense>> = _expenses
 

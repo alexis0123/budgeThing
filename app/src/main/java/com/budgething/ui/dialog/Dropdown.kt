@@ -76,7 +76,7 @@ fun Dropdown(
                 DropdownMenuItem(
                     text = { Text(item) },
                     onClick = {
-                        onSelect(item) // send back to parent
+                        onSelect(item)
                         showOptions = false
                     }
                 )
