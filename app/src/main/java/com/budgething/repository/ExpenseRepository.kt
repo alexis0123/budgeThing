@@ -1,14 +1,15 @@
-package com.budgething.Repository
+package com.budgething.repository
 
-import com.budgething.Model.Expense
+import com.budgething.model.Expense
 
 class ExpenseRepository {
 
     private val _expenses: MutableList<Expense> = mutableListOf()
-    val expenses: List<Expense> get() = _expenses
 
     fun addExpense(expense: Expense) {
         _expenses.add(expense)
     }
+
+    fun getAllExpense(): List<Expense> = _expenses
 
 }

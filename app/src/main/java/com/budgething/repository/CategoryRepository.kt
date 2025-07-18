@@ -1,6 +1,6 @@
-package com.budgething.Repository
+package com.budgething.repository
 
-import com.budgething.Model.Category
+import com.budgething.model.Category
 
 class CategoryRepository {
 

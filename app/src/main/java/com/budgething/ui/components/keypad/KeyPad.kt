@@ -41,7 +41,7 @@ fun KeyPad(
                     "→" -> Confirm("→", amount.value.isNotEmpty() ) {}
                     "✔" -> Confirm(
                         "✔",
-                        amount.value.isNotEmpty() && amount.value.toDouble() > 0
+                        amount.value.isNotEmpty() && amount.value.toDouble() >= 1
                     ) {
                         onConfirm(amount.value)
                         viewModel.deleteAll()
