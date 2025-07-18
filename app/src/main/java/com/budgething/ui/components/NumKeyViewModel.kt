@@ -1,4 +1,4 @@
-package com.budgething.ui.components.keypad
+package com.budgething.ui.components
 
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

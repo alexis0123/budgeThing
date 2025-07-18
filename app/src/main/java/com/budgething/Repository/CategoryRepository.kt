@@ -6,12 +6,11 @@ class CategoryRepository {
 
     private val _categories = mutableListOf<Category>(
         Category("Food",mutableListOf(
-            "Groceries",
+            "Meal",
             "Snacks",
             "Drinks",
             "Fruits",
             "Vegetables",
-            "Baking Supplies",
             "Instant Food"
         )),
 
@@ -35,41 +34,16 @@ class CategoryRepository {
         Category("Cosmetics",mutableListOf(
             "Skincare",
             "Makeup",
-            "Lipstick",
-            "Foundation",
-            "Concealer",
             "Powder",
-            "Eyeliner",
-            "Mascara",
-            "Eyeshadow",
-            "Blush",
-            "Highlighter",
-            "Primer",
-            "Setting Spray",
-            "Facial Cleanser",
-            "Toner",
-            "Moisturizer",
-            "Serums",
-            "Sunscreen",
-            "Face Masks",
             "Cosmetic Tools"
         )),
 
         Category("Household",mutableListOf(
             "Cleaning Supplies",
             "Laundry Products",
-            "Toilet Paper",
-            "Paper Towels",
-            "Trash Bags",
-            "Air Fresheners",
             "Disinfectants",
             "Kitchen Supplies",
-            "Detergents",
             "Dishwashing Soap",
-            "Light Bulbs",
-            "Batteries",
-            "Pest Control",
-            "Storage Solutions",
             "Furniture",
             "Home Repair Tools",
             "Bedding",

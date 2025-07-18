@@ -21,7 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.budgething.ui.components.keypad.NumKeyViewModel
+import com.budgething.ui.components.NumKeyViewModel
 import com.budgething.ui.theme.BudgeThingTheme
 import com.budgething.ui.components.FormattedAmountDisplay
 import com.budgething.ui.components.keypad.KeyPad
@@ -35,10 +35,11 @@ fun MainScreen(viewModel: NumKeyViewModel = viewModel(),
 
     var showDialog by remember { mutableStateOf(false) }
     val amount by viewModel.amount.collectAsState()
+    var confirmedAmount by remember { mutableStateOf("") }
 
     ConfirmExpenseDialog(
         showDialog = showDialog,
-        amount = amount,
+        amount = confirmedAmount,
         dismiss = { showDialog = false },
         viewModel = confirmExpenseViewModel
     )
@@ -77,7 +78,8 @@ fun MainScreen(viewModel: NumKeyViewModel = viewModel(),
             ) {
                 HorizontalDivider()
 
-                KeyPad({
+                KeyPad({ amount ->
+                    confirmedAmount = amount
                     showDialog = true
                 })
             }

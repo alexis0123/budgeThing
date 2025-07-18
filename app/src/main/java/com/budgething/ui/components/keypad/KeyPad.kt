@@ -7,11 +7,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.budgething.ui.components.keypad.NumKeyViewModel
+import com.budgething.ui.components.NumKeyViewModel
 
 @Composable
 fun KeyPad(
-    onConfirm: () -> Unit,
+    onConfirm: (amount: String) -> Unit,
     viewModel: NumKeyViewModel = viewModel()
 ) {
 
@@ -39,8 +39,12 @@ fun KeyPad(
                     "⌫" -> Key(label) { viewModel.deleteLast() }
                     "C" -> Key(label) { viewModel.deleteAll() }
                     "→" -> Confirm("→", amount.value.isNotEmpty() ) {}
-                    "✔" -> Confirm("✔", amount.value.isNotEmpty() ) {
-                        onConfirm()
+                    "✔" -> Confirm(
+                        "✔",
+                        amount.value.isNotEmpty() && amount.value.toDouble() > 0
+                    ) {
+                        onConfirm(amount.value)
+                        viewModel.deleteAll()
                     }
                     else -> Key(label) { viewModel.addDigit(label) }
                 }
