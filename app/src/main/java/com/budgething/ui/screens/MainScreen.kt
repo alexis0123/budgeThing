@@ -23,8 +23,9 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.budgething.ui.components.NumKeyViewModel
 import com.budgething.ui.theme.BudgeThingTheme
-import com.budgething.ui.components.FormattedAmountDisplay
+import com.budgething.ui.components.topscreen.FormattedAmountDisplay
 import com.budgething.ui.components.keypad.KeyPad
+import com.budgething.ui.components.topscreen.TopScreen
 import com.budgething.ui.dialog.ConfirmExpenseDialog
 import com.budgething.ui.dialog.ConfirmExpenseViewModel
 
@@ -61,17 +62,15 @@ fun MainScreen(viewModel: NumKeyViewModel = viewModel(),
             Box(
                 modifier = Modifier
                     .weight(1f)
-                    .fillMaxWidth(),
-                contentAlignment = Alignment.BottomEnd
+                    .fillMaxWidth()
+                    .padding(horizontal = 15.dp)
             ) {
-                Row(modifier = Modifier.padding(horizontal = 15.dp)) {
-                    FormattedAmountDisplay(amount)
-                }
+                TopScreen(amount)
             }
 
             Column(
                 modifier = Modifier
-                    .weight(1.4f)
+                    .weight(1f)
                     .fillMaxWidth()
                     .padding(bottom = 50.dp),
                 verticalArrangement = Arrangement.SpaceBetween
