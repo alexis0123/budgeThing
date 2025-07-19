@@ -1,6 +1,6 @@
-package com.budgething.repository
+package com.budgething.data.repository
 
-import com.budgething.model.Expense
+import com.budgething.data.model.Expense
 
 class ExpenseRepository {
 
@@ -11,5 +11,7 @@ class ExpenseRepository {
     }
 
     fun getAllExpense(): List<Expense> = _expenses
+
+    fun clearAll() = _expenses.clear()
 
 }

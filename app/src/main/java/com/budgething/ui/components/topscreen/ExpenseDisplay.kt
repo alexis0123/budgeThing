@@ -7,26 +7,23 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.budgething.ExpenseViewModel
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.MaterialTheme
+import com.budgething.data.model.Expense
 
 @Composable
-fun ExpenseDisplay(viewModel: ExpenseViewModel = viewModel()) {
-    val expenses = viewModel.expenses.collectAsState()
+fun ExpenseDisplay(expenses: List<Expense>) {
 
-    if (expenses.value.isNotEmpty()) {
+    if (expenses.isNotEmpty()) {
         LazyRow(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(110.dp),
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            items(expenses.value) { expense ->
+            items(expenses) { expense ->
                 ExpenseCard(
                     name = expense.name,
                     amount = expense.amount,

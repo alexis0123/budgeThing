@@ -1,6 +1,6 @@
-package com.budgething.repository
+package com.budgething.data.repository
 
-import com.budgething.model.Item
+import com.budgething.data.model.Item
 
 class ItemRepository {
 

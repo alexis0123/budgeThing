@@ -4,13 +4,13 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -21,17 +21,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.budgething.ExpenseViewModel
 import com.budgething.ui.components.NumKeyViewModel
 import com.budgething.ui.theme.BudgeThingTheme
-import com.budgething.ui.components.topscreen.FormattedAmountDisplay
 import com.budgething.ui.components.keypad.KeyPad
 import com.budgething.ui.components.topscreen.TopScreen
 import com.budgething.ui.dialog.ConfirmExpenseDialog
 import com.budgething.ui.dialog.ConfirmExpenseViewModel
 
 @Composable
-fun MainScreen(viewModel: NumKeyViewModel = viewModel(),
-               confirmExpenseViewModel: ConfirmExpenseViewModel = viewModel()
+fun MainScreen(
+    viewModel: NumKeyViewModel = viewModel(),
+    confirmExpenseViewModel: ConfirmExpenseViewModel = viewModel(),
+    expenseViewModel: ExpenseViewModel = viewModel()
 ) {
 
     var showDialog by remember { mutableStateOf(false) }
@@ -43,7 +45,8 @@ fun MainScreen(viewModel: NumKeyViewModel = viewModel(),
         amount = confirmedAmount,
         dismiss = { showDialog = false },
         confirm = {},
-        viewModel = confirmExpenseViewModel
+        viewModel = confirmExpenseViewModel,
+        expenseViewModel
     )
 
     Box(
@@ -64,9 +67,8 @@ fun MainScreen(viewModel: NumKeyViewModel = viewModel(),
                 modifier = Modifier
                     .weight(1f)
                     .fillMaxWidth()
-                    .padding(horizontal = 15.dp)
             ) {
-                TopScreen(amount)
+                TopScreen(amount, expenseViewModel)
             }
 
             Column(

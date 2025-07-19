@@ -24,6 +24,8 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import java.util.Locale
 import androidx.compose.runtime.getValue
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.budgething.ExpenseViewModel
 
 @Composable
 fun ConfirmExpenseDialog(
@@ -31,7 +33,8 @@ fun ConfirmExpenseDialog(
     amount: String,
     dismiss: () -> Unit,
     confirm: () -> Unit,
-    viewModel: ConfirmExpenseViewModel
+    viewModel: ConfirmExpenseViewModel,
+    expenseViewModel: ExpenseViewModel
 ) {
 
     val mainCategory by viewModel.mainCategory.collectAsState()
@@ -104,7 +107,9 @@ fun ConfirmExpenseDialog(
                         },
                         mainCategory = mainCategory,
                         subCategory = subCategory,
-                        name = name
+                        name = name,
+                        amount = amount.toDouble(),
+                        expenseViewModel
                     )
 
                 }

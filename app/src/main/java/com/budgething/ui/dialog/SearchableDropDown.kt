@@ -37,6 +37,7 @@ fun SearchableDropDown(viewModel: ConfirmExpenseViewModel = viewModel()) {
                 showFilter = it.isNotEmpty()
             },
             singleLine = true,
+            placeholder = { Text("Expense name", color = MaterialTheme.colorScheme.onSecondary) },
             modifier = Modifier.fillMaxWidth()
         )
 

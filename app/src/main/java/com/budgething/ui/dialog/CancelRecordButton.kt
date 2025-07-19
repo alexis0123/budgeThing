@@ -14,13 +14,18 @@ import androidx.compose.runtime.State
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.budgething.ExpenseViewModel
+import java.time.temporal.TemporalAmount
 
 @Composable
 fun CancelRecordButton(
     dismiss: () -> Unit,
     mainCategory: String,
     subCategory: String,
-    name: String
+    name: String,
+    amount: Double,
+    viewModel: ExpenseViewModel
 ) {
     Row(
         modifier = Modifier
@@ -30,9 +35,7 @@ fun CancelRecordButton(
         verticalAlignment = Alignment.Bottom
     ) {
         Button(
-            onClick = {
-                dismiss()
-            },
+            onClick = dismiss,
             colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.secondary),
             elevation = ButtonDefaults.buttonElevation(
                 defaultElevation = 5.dp,
@@ -44,7 +47,10 @@ fun CancelRecordButton(
 
         Button(
             enabled = mainCategory.isNotEmpty() && subCategory.isNotEmpty() && name.isNotEmpty(),
-            onClick = {},
+            onClick = {
+                viewModel.addExpense(mainCategory, subCategory, name, amount)
+                dismiss()
+            },
             colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary),
             elevation = ButtonDefaults.buttonElevation(
                 defaultElevation = 5.dp,

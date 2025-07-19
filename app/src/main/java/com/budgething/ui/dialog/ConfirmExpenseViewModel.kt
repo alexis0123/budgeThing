@@ -1,9 +1,9 @@
 package com.budgething.ui.dialog
 
 import androidx.lifecycle.ViewModel
-import com.budgething.model.Item
-import com.budgething.repository.CategoryRepository
-import com.budgething.repository.ItemRepository
+import com.budgething.data.model.Item
+import com.budgething.data.repository.CategoryRepository
+import com.budgething.data.repository.ItemRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 

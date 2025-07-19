@@ -1,20 +1,22 @@
 package com.budgething.ui.components.topscreen
 
+import android.icu.util.Currency
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun FormattedAmountDisplay(amount: String) {
+fun FormattedAmountDisplay(amount: String, fontSize: Int, color: Color, format: String = "") {
 
     val formattedAmount = amount.toLongOrNull()?.let {
-        "%,d".format(it)
+        "$format %,d".format(it)
     } ?: amount
 
     Text(
-        formattedAmount, fontSize = 40.sp,
-        color = MaterialTheme.colorScheme.onBackground
+        formattedAmount, fontSize = fontSize.sp,
+        color = color
     )
 
 }

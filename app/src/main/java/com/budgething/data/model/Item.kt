@@ -1,4 +1,4 @@
-package com.budgething.model
+package com.budgething.data.model
 
 data class Item(
     val name: String,

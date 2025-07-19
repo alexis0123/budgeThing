@@ -1,4 +1,4 @@
-package com.budgething.model
+package com.budgething.data.model
 
 import java.time.LocalDate
 
